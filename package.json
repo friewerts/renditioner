@@ -1,0 +1,23 @@
+{
+  "name": "renditioner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/friewerts/renditioner.git"
+  },
+  "author": "Frederik Riewerts",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/friewerts/renditioner/issues"
+  },
+  "homepage": "https://github.com/friewerts/renditioner#readme",
+  "dependencies": {
+    "glob": "^7.1.4",
+    "sharp": "^0.23.0"
+  }
+}
