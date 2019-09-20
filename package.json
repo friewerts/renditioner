@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "ts-node index.ts"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,24 @@
   },
   "homepage": "https://github.com/friewerts/renditioner#readme",
   "dependencies": {
+    "@types/sharp": "^0.22.2",
     "glob": "^7.1.4",
     "sharp": "^0.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.5",
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2",
+    "stylelint": "^11.0.0",
+    "stylelint-config-prettier": "^5.2.0",
+    "stylelint-config-recommended-scss": "^3.3.0",
+    "stylelint-prettier": "^1.1.1",
+    "stylelint-scss": "^3.10.1",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
   }
 }

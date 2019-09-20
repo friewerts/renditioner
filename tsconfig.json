@@ -1,0 +1,23 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "strict": true,
+    "target": "es2017",
+    "module": "umd",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "Core/*": ["src/js/core/*"],
+      "Services/*": ["src/js/services/*"],
+      "Helper/*": ["src/js/helper/*"],
+      "Components/*": ["src/components/*"],
+      "Abstracts/*": ["src/abstract-components/*"],
+      "Icons/*": ["src/assets/icons/*"]
+    }
+  }
+}

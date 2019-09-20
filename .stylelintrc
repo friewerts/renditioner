@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "stylelint-config-recommended-scss",
+    "stylelint-config-prettier"
+  ],
+  "plugins": [
+    "stylelint-scss",
+    "stylelint-prettier"
+  ],
+  "rules": {
+    "prettier/prettier": true,
+    "no-descending-specificity": null,
+    "selector-class-pattern": [
+      "^(mruk\\-[a-z0-9\\-\\_]{1}[a-z0-9\\-\\_]*$|[a-z0-9]*$)",
+      {
+        "message": "does not follow hyphenated BEM style with prefix 'mruk-'.",
+      }
+    ],
+    "selector-id-pattern": [
+      "^(mruk\\-[a-z0-9\\-\\_]{1}[a-z0-9\\-\\_]*$|[a-z0-9]*$)",
+      {
+        "message": "does not follow hyphenated BEM style with prefix 'mruk-'.",
+      }
+    ]
+  }
+}
