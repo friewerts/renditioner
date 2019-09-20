@@ -22,3 +22,7 @@ jobs:
           npm run build
         env:
           CI: true
+      - uses: actions/upload-artifact@master
+        with:
+          name: my-artifact
+          path: target
