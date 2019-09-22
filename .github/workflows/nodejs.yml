@@ -23,3 +23,15 @@ jobs:
           npm run build
         env:
           CI: true
+  deploy:
+    steps:
+      - uses: actions/checkout@v1
+
+      - run: mkdir -p artifacts/artifact
+
+      - run: echo hello > artifacts/artifact/world.txt
+
+      - uses: actions/upload-artifact@master
+        with:
+          name: my-first-artifact
+          path: artifacts/artifact
