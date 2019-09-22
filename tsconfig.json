@@ -10,14 +10,6 @@
     "sourceMap": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
-    "paths": {
-      "Core/*": ["src/js/core/*"],
-      "Services/*": ["src/js/services/*"],
-      "Helper/*": ["src/js/helper/*"],
-      "Components/*": ["src/components/*"],
-      "Abstracts/*": ["src/abstract-components/*"],
-      "Icons/*": ["src/assets/icons/*"]
-    }
+    "baseUrl": "./"
   }
 }

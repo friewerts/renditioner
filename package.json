@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "ts-node index.ts"
+    "build": "ts-node src/index.ts",
+    "stylelint": "stylelint \"src/**/*.scss\"",
+    "stylelint:fix": "stylelint \"src/**/*.scss\" --fix",
+    "eslint": "eslint 'src/**/*.ts'",
+    "eslint:fix": "eslint 'src/**/*.ts' --fix"
   },
   "repository": {
     "type": "git",
