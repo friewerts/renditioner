@@ -24,8 +24,8 @@ jobs:
         env:
           CI: true
   deploy:
-    steps:
     runs-on: ubuntu-latest
+    steps:
       - uses: actions/checkout@v1
 
       - run: mkdir -p artifacts/artifact
