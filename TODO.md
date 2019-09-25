@@ -9,3 +9,10 @@ List of things to be done
 + ts build
 + type definitions
 + module/node export
+
+## Documentation 👨🏻‍💻
++ write abstract description
++ add Roadmap
++ usage examples
++ options description
++ example project
