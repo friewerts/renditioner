@@ -1,5 +1,5 @@
 # Todos
-List of things to be done
+List of things to be done in the near future. 
 
 ## Code Cleanup👷🏻‍♂️
 + strict type usage
