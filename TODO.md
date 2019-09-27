@@ -2,8 +2,10 @@
 List of things to be done in the near future. 
 
 ## Code Cleanup👷🏻‍♂️
++ add eslint
 + strict type usage
 + extract helper functions
++ add unit-test
 
 ## npm Package 📦
 + ts build
