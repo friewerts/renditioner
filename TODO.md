@@ -18,3 +18,7 @@ List of things to be done in the near future.
 + usage examples
 + options description
 + example project
+
+## Workflow
++ add PR Template
++ add Issue Template
