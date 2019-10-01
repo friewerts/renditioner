@@ -5,6 +5,3 @@
 
 
 == Changes ==
-
-
-== Affected Packages ==
