@@ -6,6 +6,7 @@ List of things to be done in the near future.
 + strict type usage
 + extract helper functions
 + add unit-test
++ extract type-definitions
 
 ## npm Package 📦
 + ts build
