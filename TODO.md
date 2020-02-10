@@ -12,6 +12,7 @@ List of things to be done in the near future.
 + ts build
 + type definitions
 + module/node export
++ added webpack plugin
 
 ## Documentation 👨🏻‍💻
 + write abstract description
