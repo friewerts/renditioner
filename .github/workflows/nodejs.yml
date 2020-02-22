@@ -19,7 +19,7 @@ jobs:
       - name: npm install and lint
         run: |
           npm install
-          npm eslint
+          npm run eslint
   build:
     runs-on: ubuntu-latest
 

@@ -3,6 +3,7 @@ import * as sharp from 'sharp';
 import { basename, extname } from 'path';
 
 type srcFilesDef = string | string[];
+
 const getSrcFiles = (srcFiles: srcFilesDef): string[] => {
   if (typeof srcFiles === 'string') {
     return globS(srcFiles);
