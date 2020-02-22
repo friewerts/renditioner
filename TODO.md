@@ -2,16 +2,16 @@
 List of things to be done in the near future. 
 
 ## Code Cleanup👷🏻‍♂️
-+ add eslint
++ add eslint (/)
 + strict type usage
 + extract helper functions
 + add unit-test
 + extract type-definitions
 
 ## npm Package 📦
-+ ts build
-+ type definitions
-+ module/node export
++ ts build (/)
++ type definitions (/)
++ module/node export (/)
 + added webpack plugin
 
 ## Documentation 👨🏻‍💻
