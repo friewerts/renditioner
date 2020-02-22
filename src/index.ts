@@ -1,6 +1,7 @@
 import { sync as globS } from 'glob';
 import sharp from 'sharp';
-import { basename, extname } from 'path';
+import { basename, extname, join, relative, dirname } from 'path';
+import fs from 'fs';
 
 type srcFilesDef = string | string[];
 
@@ -24,6 +25,7 @@ interface Rendition {
 interface RenditionOptions extends Rendition {
   buffer: Buffer;
   filename: string;
+  dirname: string;
 }
 
 const getFilename = (renditionOptions: Rendition, image: ImageOptions): string => {
@@ -45,6 +47,7 @@ const createRendition = async (image: ImageOptions, options: Rendition): Promise
     ...options,
     buffer,
     filename: getFilename(options, image),
+    dirname: image.dirname,
   };
 };
 
@@ -53,7 +56,7 @@ type fileType = 'webp' | 'jpeg';
 const createWebpFile = (rendition: Buffer, filename: string) => {
   return sharp(rendition)
     .webp({ quality: 70 })
-    .toFile(`target/${filename}.webp`);
+    .toFile(`${filename}.webp`);
 };
 
 const createJpegFile = (rendition: Buffer, filename: string): Promise<sharp.OutputInfo> => {
@@ -62,16 +65,22 @@ const createJpegFile = (rendition: Buffer, filename: string): Promise<sharp.Outp
       quality: 90,
       chromaSubsampling: '4:4:4',
     })
-    .toFile(`target/${filename}.jpeg`);
+    .toFile(`${filename}.jpeg`);
 };
 
-const createFiles = (renditions: RenditionOptions[], fileType: fileType): Promise<sharp.OutputInfo[]> => {
+const createFiles = (
+  renditions: RenditionOptions[],
+  fileType: fileType,
+  target: string,
+): Promise<sharp.OutputInfo[]> => {
   return Promise.all(
     renditions.map((rendition: RenditionOptions) => {
+      const targetDir = join(target, rendition.dirname);
+      if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
       if (fileType === 'webp') {
-        return createWebpFile(rendition.buffer, rendition.filename);
+        return createWebpFile(rendition.buffer, join(targetDir, rendition.filename));
       } else {
-        return createJpegFile(rendition.buffer, rendition.filename);
+        return createJpegFile(rendition.buffer, join(targetDir, rendition.filename));
       }
     }),
   );
@@ -80,14 +89,16 @@ const createFiles = (renditions: RenditionOptions[], fileType: fileType): Promis
 interface ImageOptions {
   path: string;
   filename: string;
+  dirname: string;
   buffer: Buffer;
 }
 
-const importFile = async (path: string): Promise<ImageOptions> => {
+const importFile = async (path: string, basedir: string): Promise<ImageOptions> => {
   const buffer = await sharp(path).toBuffer();
   return {
     path,
     filename: basename(path, extname(path)),
+    dirname: dirname(relative(basedir, path)),
     buffer,
   };
 };
@@ -96,36 +107,26 @@ interface RenderOptions {
   renditions: Rendition[];
   fileTypes: fileType[];
   sources: srcFilesDef;
+  target: string;
+  basedir?: string;
 }
 
 export const renderImages = async (options: RenderOptions) => {
   const files = getSrcFiles(options.sources);
+
+  if (!fs.existsSync(options.target)) fs.mkdirSync(options.target, { recursive: true });
+
   return await Promise.all(
     files.map(async file => {
-      const curImg = await importFile(file);
+      const curImg = await importFile(file, options.basedir || '.');
 
       const renditionBuffers = await Promise.all(
         options.renditions.map(rendition => createRendition(curImg, rendition)),
       );
 
-      return await Promise.all(options.fileTypes.map(fileType => createFiles(renditionBuffers, fileType)));
+      return await Promise.all(
+        options.fileTypes.map(fileType => createFiles(renditionBuffers, fileType, options.target)),
+      );
     }),
   );
 };
-
-// console.time();
-// const sources = 'src/images/**/*.*';
-// const renditions = [
-//   {
-//     width: 1224,
-//   },
-//   {
-//     width: 220,
-//     height: 165,
-//   },
-//   {
-//     width: 200,
-//     height: 150,
-//   },
-// ];
-// await renderImages({ sources, fileTypes: ['webp', 'jpeg'], renditions });

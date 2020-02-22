@@ -11,6 +11,8 @@ npm i renditioner
 ## Usage
 
 ```
+import { renderImages } from 'renditioner';
+
 const sources = 'src/images/**/*.*';
 const renditions = [
   {
@@ -25,15 +27,17 @@ const renditions = [
     height: 150,
   },
 ];
-await renderImages({ sources, fileTypes: ['webp', 'jpeg'], renditions });
+await renderImages({ sources, fileTypes: ['webp', 'jpeg'], renditions, basedir: "src/images/", target: "dist" });
 ```
 
 ## RenderOptions
 | key       | description                                                           |
 |------------|------------------------------------------------------------------------------|
-| sources: | glob or Array of glob describing paths to all image you want to be processed |
-| fileTypes: | Array the target-filetype you want your images to be rendered in (e.g 'webp', 'jpeg', 'png', etc..)  |
+| sources:    | glob or Array of glob describing paths to all image you want to be processed |
+| fileTypes:  | Array the target-filetype you want your images to be rendered in ('webp', 'jpeg')  |
 | renditions: | Array of all Renditions you want to be processed |
+| basedir:    | releative path-anchor to create target paths (defaults to rootdir)  |
+| target:     | target path   |
 
 ### Rendition
 Renditions are defined as objects with with and height (optional)

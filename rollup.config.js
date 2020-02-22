@@ -15,7 +15,7 @@ export default {
       format: 'es', // the preferred format
     },
   ],
-  external: [...Object.keys(pkg.dependencies || {}), 'path'],
+  external: [...Object.keys(pkg.dependencies || {}), 'path', 'fs'],
   plugins: [
     typescript({
       typescript: require('typescript'),
