@@ -29,12 +29,6 @@ interface RenditionOptions extends Rendition {
   dirname: string;
 }
 
-const getFilename = (renditionOptions: Rendition, image: ImageOptions): string => {
-  const base = `${image.filename}__${renditionOptions.width}`;
-  if (renditionOptions.height) return `${base}x${renditionOptions.height}`;
-  return base;
-};
-
 const hasAspectRatio = (options: Rendition): boolean => {
   if (options.aspectRatio === undefined) return false;
   const aspectParts = options.aspectRatio.split(':');
@@ -46,6 +40,13 @@ const hasAspectRatio = (options: Rendition): boolean => {
     return false;
 
   return true;
+};
+
+const getFilename = (renditionOptions: Rendition, image: ImageOptions): string => {
+  const base = `${image.filename}__${renditionOptions.width}`;
+  if (hasAspectRatio(renditionOptions)) return `${base}_${renditionOptions.aspectRatio?.split(':').join('x')}`;
+  else if (renditionOptions.height) return `${base}x${renditionOptions.height}`;
+  return base;
 };
 
 const getHeight = (aspectRatio: string, width: number): number => {
