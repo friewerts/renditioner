@@ -2,13 +2,18 @@
   "compileOnSave": false,
   "compilerOptions": {
     "strict": true,
-    "target": "es2017",
-    "module": "umd",
+    "target": "ES2015",
+    "module": "ESNext",
+    "lib": [
+      "es2015",
+      "DOM"
+    ],
+    "declaration": true,
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "noUnusedLocals": true,
     "sourceMap": true,
-    "allowJs": true,
+    "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./"
   }

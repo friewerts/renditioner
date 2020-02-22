@@ -1,5 +1,5 @@
 import { sync as globS } from 'glob';
-import * as sharp from 'sharp';
+import sharp from 'sharp';
 import { basename, extname } from 'path';
 
 type srcFilesDef = string | string[];
@@ -98,7 +98,7 @@ interface RenderOptions {
   sources: srcFilesDef;
 }
 
-const renderImages = async (options: RenderOptions) => {
+export const renderImages = async (options: RenderOptions) => {
   const files = getSrcFiles(options.sources);
   return await Promise.all(
     files.map(async file => {
@@ -113,19 +113,19 @@ const renderImages = async (options: RenderOptions) => {
   );
 };
 
-console.time();
-const renditions = [
-  {
-    width: 1224,
-  },
-  {
-    width: 220,
-    height: 165,
-  },
-  {
-    width: 200,
-    height: 150,
-  },
-];
-const sources = 'src/images/**/*.*';
-renderImages({ sources, fileTypes: ['webp', 'jpeg'], renditions }).then(() => console.timeEnd());
+// console.time();
+// const sources = 'src/images/**/*.*';
+// const renditions = [
+//   {
+//     width: 1224,
+//   },
+//   {
+//     width: 220,
+//     height: 165,
+//   },
+//   {
+//     width: 200,
+//     height: 150,
+//   },
+// ];
+// await renderImages({ sources, fileTypes: ['webp', 'jpeg'], renditions });
