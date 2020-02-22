@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install and build
+      - name: npm install and lint
         run: |
           npm install
           npm eslint
@@ -33,16 +33,16 @@ jobs:
         run: |
           npm install
           npm run build
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v1
 
-      - run: mkdir -p artifacts/artifact
+  #     - run: mkdir -p artifacts/artifact
 
-      - run: echo hello > artifacts/artifact/world.txt
+  #     - run: echo hello > artifacts/artifact/world.txt
 
-      - uses: actions/upload-artifact@master
-        with:
-          name: my-first-artifact
-          path: artifacts/artifact
+  #     - uses: actions/upload-artifact@master
+  #       with:
+  #         name: my-first-artifact
+  #         path: artifacts/artifact
