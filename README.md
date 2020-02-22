@@ -46,6 +46,7 @@ Renditions are defined as objects with with and height (optional)
 interface Rendition {
   width: number;
   height?: number;
+  aspectRatio?: string; // (e.g. 16:9)
 }
 ```
 

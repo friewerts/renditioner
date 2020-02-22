@@ -20,6 +20,7 @@ const getSrcFiles = (srcFiles: srcFilesDef): string[] => {
 interface Rendition {
   width: number;
   height?: number;
+  aspectRatio?: string;
 }
 
 interface RenditionOptions extends Rendition {
@@ -34,10 +35,30 @@ const getFilename = (renditionOptions: Rendition, image: ImageOptions): string =
   return base;
 };
 
+const hasAspectRatio = (options: Rendition): boolean => {
+  if (options.aspectRatio === undefined) return false;
+  const aspectParts = options.aspectRatio.split(':');
+  if (
+    aspectParts.length !== 2 ||
+    Number.isNaN(parseInt(aspectParts[0], 10)) ||
+    Number.isNaN(parseInt(aspectParts[1], 10))
+  )
+    return false;
+
+  return true;
+};
+
+const getHeight = (aspectRatio: string, width: number): number => {
+  const aspectParts = aspectRatio.split(':');
+
+  return Math.round((parseInt(aspectParts[1], 10) / parseInt(aspectParts[0], 10)) * width);
+};
+
 const createRendition = async (image: ImageOptions, options: Rendition): Promise<RenditionOptions> => {
   const resizeOpts = [options.width];
 
-  if (options.height) resizeOpts.push(options.height);
+  if (hasAspectRatio(options)) resizeOpts.push(getHeight(options.aspectRatio || '1:1', options.width));
+  else if (options.height) resizeOpts.push(options.height);
 
   const buffer = await sharp(image.buffer)
     .resize(...resizeOpts)
