@@ -10,7 +10,7 @@ const getSrcFiles = (srcFiles: srcFilesDef): string[] => {
     return globS(srcFiles);
   } else {
     let paths: string[] = [];
-    srcFiles.forEach(srcFile => {
+    srcFiles.forEach((srcFile) => {
       paths = paths.concat(globS(srcFile));
     });
     return paths;
@@ -76,9 +76,7 @@ const createRendition = async (image: ImageOptions, options: Rendition): Promise
 type fileType = 'webp' | 'jpeg' | 'png';
 
 const createWebpFile = (rendition: Buffer, filename: string) => {
-  return sharp(rendition)
-    .webp({ quality: 70 })
-    .toFile(`${filename}.webp`);
+  return sharp(rendition).webp({ quality: 70 }).toFile(`${filename}.webp`);
 };
 
 const createJpegFile = (rendition: Buffer, filename: string): Promise<sharp.OutputInfo> => {
@@ -91,9 +89,7 @@ const createJpegFile = (rendition: Buffer, filename: string): Promise<sharp.Outp
 };
 
 const createPngFile = (rendition: Buffer, filename: string): Promise<sharp.OutputInfo> => {
-  return sharp(rendition)
-    .png()
-    .toFile(`${filename}.png`);
+  return sharp(rendition).png().toFile(`${filename}.png`);
 };
 
 const createFiles = (
@@ -147,15 +143,15 @@ export const renderImages = async (options: RenderOptions) => {
   if (!fs.existsSync(options.target)) fs.mkdirSync(options.target, { recursive: true });
 
   return await Promise.all(
-    files.map(async file => {
+    files.map(async (file) => {
       const curImg = await importFile(file, options.basedir || '.');
 
       const renditionBuffers = await Promise.all(
-        options.renditions.map(rendition => createRendition(curImg, rendition)),
+        options.renditions.map((rendition) => createRendition(curImg, rendition)),
       );
 
       return await Promise.all(
-        options.fileTypes.map(fileType => createFiles(renditionBuffers, fileType, options.target)),
+        options.fileTypes.map((fileType) => createFiles(renditionBuffers, fileType, options.target)),
       );
     }),
   );
