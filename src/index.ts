@@ -73,7 +73,7 @@ const createRendition = async (image: ImageOptions, options: Rendition): Promise
   };
 };
 
-type fileType = 'webp' | 'jpeg';
+type fileType = 'webp' | 'jpeg' | 'png';
 
 const createWebpFile = (rendition: Buffer, filename: string) => {
   return sharp(rendition)
@@ -90,6 +90,12 @@ const createJpegFile = (rendition: Buffer, filename: string): Promise<sharp.Outp
     .toFile(`${filename}.jpeg`);
 };
 
+const createPngFile = (rendition: Buffer, filename: string): Promise<sharp.OutputInfo> => {
+  return sharp(rendition)
+    .png()
+    .toFile(`${filename}.png`);
+};
+
 const createFiles = (
   renditions: RenditionOptions[],
   fileType: fileType,
@@ -101,6 +107,8 @@ const createFiles = (
       if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
       if (fileType === 'webp') {
         return createWebpFile(rendition.buffer, join(targetDir, rendition.filename));
+      } else if (fileType === 'png') {
+        return createPngFile(rendition.buffer, join(targetDir, rendition.filename));
       } else {
         return createJpegFile(rendition.buffer, join(targetDir, rendition.filename));
       }
